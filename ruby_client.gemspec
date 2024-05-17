@@ -1,30 +1,30 @@
 # frozen_string_literal: true
 
 if File.exist?("./lib/ruby_client/version.rb")
-  require_relative "lib/ruby_client/version"
+  require_relative 'lib/ruby_client/version'
 else
-  require "ruby_client/version"
+  require 'ruby_client/version'
 end
 
 
 
 Gem::Specification.new do |spec|
-  spec.name          = "dynamicpdf_api"
+  spec.name          = 'dynamicpdf_api'
   spec.version       = RubyClient::VERSION
-  spec.authors       = ["Dynamicpdf"]
-  spec.email         = ["info@dynamicpdf.com"]
+  spec.authors       = ['Dynamicpdf']
+  spec.email         = ['info@dynamicpdf.com']
 
-  spec.summary       = "Ruby client library for the DynamicPDF API."
-  spec.description   = "Ruby client library for the DynamicPDF API."
-  spec.homepage      = "https://github.com/dynamicpdf-api"
-  spec.license       = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.summary       = "A Ruby Client API that uses the DynamicPDF API to create, merge, split, form fill, stamp, secure/encrypt PDF documents and convert word/Excel files to PDF."
+  spec.description   = "A Ruby Client API that uses the DynamicPDF API to create, merge, split, form fill, stamp, secure/encrypt PDF documents and convert word/Excel files to PDF."
+  spec.homepage      = 'https://github.com/dynamicpdf-api/ruby-client'
+  spec.license       = 'MIT'
+  spec.required_ruby_version = '>= 2.6.0'
 
-  spec.metadata["allowed_push_host"] = "Set to your gem server 'https://example.com'"
+  # spec.metadata["allowed_push_host"] = "Set to your gem server 'https://example.com'"
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/dynamicpdf-api"
-  spec.metadata["changelog_uri"] = "https://github.com/dynamicpdf-api"
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/dynamicpdf-api/ruby-client'
+  spec.metadata['changelog_uri'] = 'https://github.com/dynamicpdf-api/ruby-client/commits/main'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

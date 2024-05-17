@@ -1,3 +1,3 @@
 ## DynamicPDF Client API
 
-PHP Documentation goes here.
+Ruby Documentation goes here.
