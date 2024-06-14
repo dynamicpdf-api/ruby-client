@@ -6,8 +6,13 @@ require_relative 'Input'
   class ConverterInput < Input
     def initialize(resource, size, orientation, margins)
       super(resource)
-      self.page_size = size
-      self.page_orientation = orientation
+
+      if (size != nil)
+        self.page_size = size
+      end
+      if (orientation != nil)
+        self.page_orientation = orientation
+      end
 
       if (margins != nil)
         @top_margin = margins
@@ -61,12 +66,12 @@ require_relative 'Input'
       @_larger = output_size.larger
       @_smaller = output_size.smaller
 
-      if @page_orientation == PageOrientation::PORTRAIT
-        @page_height = @_larger
-        @page_width = @_smaller
-      else
+      if @page_orientation == PageOrientation::LANDSCAPE
         @page_height = @_smaller
         @page_width = @_larger
+      else
+        @page_height = @_larger
+        @page_width = @_smaller
       end
     end
 
@@ -76,20 +81,22 @@ require_relative 'Input'
     def page_orientation=(value)
       @page_orientation = value
 
-      if @page_width > @page_height
-        @_smaller = @page_height
-        @_larger = @page_width
-      else
-        @_smaller = @page_width
-        @_larger = @page_height
-      end
+      if(@page_width != nil && @page_height != nil)
+        if @page_width > @page_height
+          @_smaller = @page_height
+          @_larger = @page_width
+        else
+          @_smaller = @page_width
+          @_larger = @page_height
+        end
 
-      if @page_orientation == PageOrientation::PORTRAIT
-        @page_height = @_larger
-        @page_width = @_smaller
-      else
-        @page_height = @_smaller
-        @page_width = @_larger
+        if @page_orientation == PageOrientation::LANDSCAPE
+          @page_height = @_smaller
+          @page_width = @_larger
+        else
+          @page_height = @_larger
+          @page_width = @_smaller
+        end
       end
     end
 

@@ -149,7 +149,7 @@ module DynamicPDFApi
     #
     # @return HtmlInput HtmlInput object.
     #
-    def add_html(html, basepath = null, size = PageSize.A4, orientation = PageOrientation.PORTRAIT, margins = nil)
+    def add_html(html, basepath = nil, size = nil, orientation = nil, margins = nil)
       input = nil
       if file.is_a?(String)
         input = HtmlInput.new(HtmlResource.new(html), basepath, size, orientation, margins)
@@ -168,7 +168,7 @@ module DynamicPDFApi
     #
     # @return WordInput WordInput object.
     #
-    def add_word(resource, size = PageSize.A4, orientation = PageOrientation.PORTRAIT, margins = nil)
+    def add_word(resource, size = nil, orientation = nil, margins = nil)
       input = WordInput.new(resource, size, orientation, margins)
       @inputs << input
       input
@@ -181,7 +181,7 @@ module DynamicPDFApi
     #
     # @return ExcelInput ExcelInput object.
     #
-    def add_excel(resource, size = PageSize.A4, orientation = PageOrientation.PORTRAIT, margins = nil)
+    def add_excel(resource, size = nil, orientation = nil, margins = nil)
       input = ExcelInput.new(resource, size, orientation, margins)
       @inputs << input
       input

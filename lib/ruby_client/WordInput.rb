@@ -14,7 +14,7 @@ module DynamicPDFApi
     # @param name="size">The page size of the output PDF.
     # @param name="orientation">The page orientation of the output PDF.
     # @param name="margins">The page margins of the output PDF.
-    def initialize(resource, size = PageSize::LETTER, orientation = PageOrientation::PORTRAIT, margins = nil)
+    def initialize(resource, size = nil, orientation = nil, margins = nil)
       super(resource, size, orientation, margins)
       @_type = InputType::WORD
 

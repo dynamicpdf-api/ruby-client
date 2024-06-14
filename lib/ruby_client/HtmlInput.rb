@@ -13,7 +13,7 @@ module DynamicPDFApi
     # @param size [PageSize] The page size of the output PDF.
     # @param orientation [PageOrientation] The page orientation of the output PDF.
     # @param margins [float] The page margins of the output PDF.
-    def initialize(resource, base_path = nil, size = PageSize::LETTER, orientation = PageOrientation::PORTRAIT, margins = nil)
+    def initialize(resource, base_path = nil, size = nil, orientation = nil, margins = nil)
       super(resource, size, orientation, margins)
 
       @_type = InputType::HTML
