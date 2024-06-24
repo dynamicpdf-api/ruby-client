@@ -5,40 +5,37 @@ module DynamicPDFApi
   # Represents a page input.
   #
   class PageInput < Input
-    DefaultPageHeight = 792.0.freeze
-    DefaultPagewidth = 612.0.freeze
+
     #
     # Initializes a new instance of the PageInput class.
     #
-    # @param page_width [float] The width of the page.
-    # @param page_height [float] The height of the page.
+    # @param size [String] | [Float] The size of the page or The width of the page.
+    # @param orientation [String] | [Float] The orientation of the page or The height of the page.
+    # @param margins [Float] The margins of the page.
     #
-    def initialize(page_width = nil, page_height = nil)
-      @page_size = nil
-      @page_orientation = nil
+    def initialize(size = nil, orientation = nil, margins = nil)
       super()
       @_resources = []
       @elements = []
       @_type = InputType::PAGE
-      @page_width = page_width
-      @page_height = page_height
-    end
 
-    #
-    # Initializes a new instance of the PageInput class.
-    #
-    # @param size [string] The size of the page.
-    # @param orientation [string] The orientation of the page.
-    # @param margins [float] The margins of the page.
-    def PageInputCreate(size = PageSize.Letter, orientation = PageOrientation.Portrait, margins = nil)
-      @page_size = size
-      @page_orientation = orientation
+      if (size.is_a?(String) && orientation.is_a?(String))
+        if (size != nil)
+          self.page_size = size
+        end
+        if (orientation != nil)
+          self.page_orientation = orientation
+        end
 
-      if (margins != nil)
-        @top_margin = margins
-        @bottom_margin = margins
-        @right_margin = margins
-        @left_margin = margins
+        if (margins != nil)
+          @top_margin = margins
+          @bottom_margin = margins
+          @right_margin = margins
+          @left_margin = margins
+        end
+      elsif (size.is_a?(Float) || size.is_a?(Integer))
+          @page_width = size
+          @page_height = orientation
       end
     end
 
@@ -80,14 +77,14 @@ module DynamicPDFApi
     def page_size=(value)
       @page_size = value
 
-      @output_size = UnitConverter.GetPaperSize(value)
+      @output_size = UnitConverter.get_paper_size(value)
 
-      if (PageOrientation == PageOrientation.Portrait)
-        @page_height = @output_size.larger
-        @page_width = @output_size.smaller
-      else
+      if @page_orientation == PageOrientation::LANDSCAPE
         @page_height = @output_size.smaller
         @page_width = @output_size.larger
+      else
+        @page_height = @output_size.larger
+        @page_width = @output_size.smaller
       end
     end
 
@@ -97,23 +94,24 @@ module DynamicPDFApi
     def page_orientation=(value)
       @page_orientation = value
 
-      if (@width > @page_height)
-        @smaller = @page_height
-        @larger_Width = @page_width
-      else
-        @smaller = @page_width
-        @larger_width = @page_height
-      end
+      if(@page_width != nil && @page_height != nil)
+        if @page_width > @page_height
+          @smaller = @page_height
+          @larger_Width = @page_width
+        else
+          @smaller = @page_width
+          @larger_width = @page_height
+        end
 
-      if (page_orientation == PageOrientation.Portrait)
-        @page_height = @larger_width
-        @page_width = @smaller
-      else
-        @page_height = @smaller
-        @page_width = @larger_width
+        if @page_orientation == PageOrientation::LANDSCAPE
+          @page_height = @smaller
+          @page_width = @larger_width
+        else
+          @page_height = @larger_width
+          @page_width = @smaller
+        end
       end
     end
-
     #
     # Gets or sets the elements of the page.
     #
@@ -136,6 +134,14 @@ module DynamicPDFApi
       json_array["pageWidth"] = @page_width unless @page_width.nil?
 
       json_array["pageHeight"] = @page_height unless @page_height.nil?
+
+      json_array["topMargin"] = @top_margin unless @top_margin.nil?
+
+      json_array["leftMargin"] = @left_margin unless @left_margin.nil?
+
+      json_array["bottomMargin"] = @bottom_margin unless @bottom_margin.nil?
+
+      json_array["rightMargin"] = @right_margin unless @right_margin.nil?
 
       json_array["elements"] = json_element
 
