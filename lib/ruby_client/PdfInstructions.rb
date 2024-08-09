@@ -18,7 +18,7 @@ module DynamicPDFApi
       @_form_fields = []
       @_templates = {}
       @_fonts = {}
-      @_outlines = []
+      @_out_lines = []
       @_inputs = []
       @_security = nil
       @_flatten_all_form_fields = nil
@@ -84,8 +84,8 @@ module DynamicPDFApi
         json_array['formFields'] = @_form_fields
       end
 
-      if(@_outlines.length > 0)
-        json_array['outlines'] = @_outlines
+      if(!@_out_lines._out_lines.empty?)
+        json_array['outlines'] = @_out_lines
       end
       if(indented)
         JSON.pretty_generate(json_array)

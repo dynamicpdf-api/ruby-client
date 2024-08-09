@@ -31,8 +31,6 @@ module DynamicPDFApi
         @action = action
       else
         @_from_input_id = input.id
-        input.merge_options = MergeOptions.new if input.merge_options.nil?
-        input.merge_options.out_lines = false
       end
     end
 

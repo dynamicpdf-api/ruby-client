@@ -51,11 +51,30 @@ module DynamicPDFApi
     # <param name="resourceName">The name of the resource.
     def add_additional_resource(resourcePath, resourceName = nil)
       if (resourceName == nil)
-        resourceName = Path.GetFileName(resourcePath)
+        resourceName = File.basename(resourcePath)
       end
+      additional_resource = AdditionalResource.new(resourcePath, resourceName)
+      @resources[resourceName] = additional_resource
+      # @additionalResources << additional_resource
+    end
 
-      resource = AdditionalResource.new(resourcePath, resourceName)
-      @resources.Add(resource)
+    def add_additional_resource_with_resourcedata(resourceData, additionalResourceType, resourceName)
+      type = ResourceType::PDF
+      case (additionalResourceType)
+
+      when AdditionalResourceType::FONT
+        type = ResourceType::FONT
+      when AdditionalResourceType::IMAGE
+        type = ResourceType::IMAGE
+      when AdditionalResourceType::PDF
+        type = ResourceType::PDF
+      when AdditionalResourceType::HTML
+        type = ResourceType::HTML
+      else
+        raise 'This type of resource not allowed'
+      end
+      additional_resource = AdditionalResource.new(resourceData, resourceName, type)
+      @additionalResources << additional_resource
     end
 
     attr_accessor :instructions
