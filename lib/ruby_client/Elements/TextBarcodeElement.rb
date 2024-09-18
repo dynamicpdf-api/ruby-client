@@ -8,7 +8,7 @@ module DynamicPDFApi
     def initialize(value, placement, x_offset, y_offset)
       @text_color = nil
       @font_size = nil
-      @show_text = 'nil'
+      @show_text = nil
       @_resource = nil
       @_text_font = nil
       @_font_name = nil

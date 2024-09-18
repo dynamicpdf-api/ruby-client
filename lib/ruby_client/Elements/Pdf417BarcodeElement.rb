@@ -22,8 +22,8 @@ module DynamicPDFApi
     def initialize(value,  columns, placement= ElementPlacement::TOP_LEFT, x_offset = 0, y_offset = 0)
       @columns = nil
       @y_dimension = nil
-      @process_tilde = false
-      @compact_pdf417 = false
+      @process_tilde = nil
+      @compact_pdf417 = nil
       @error_correction = nil
       @compaction = nil
 
@@ -70,11 +70,9 @@ module DynamicPDFApi
 
       json_array['yDimension'] = @y_dimension unless @y_dimension.nil?
 
-      # if(@process_tilde != nil)
-      json_array['processTilde'] = @process_tilde
+      json_array["processTilde"] = @process_tilde unless @process_tilde.nil?
 
-      # if(@CompactPdf417 != nil)
-      json_array['compactPdf417'] = @compact_pdf417
+      json_array['compactPdf417'] = @compact_pdf417 unless @compact_pdf417.nil?
 
       json_array['errorCorrection'] = @error_correction unless @error_correction.nil?
 
@@ -100,11 +98,9 @@ module DynamicPDFApi
 
       json_array['yOffset'] = @y_offset unless @y_offset.nil?
 
-      # if(@even_pages != nil)
-      json_array['evenPages'] = @even_pages
+      json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@odd_pages != nil)
-      json_array['oddPages'] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end

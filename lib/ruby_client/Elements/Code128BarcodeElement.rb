@@ -24,8 +24,8 @@ module DynamicPDFApi
     # @param y_offset [float] The Y coordinate of the barcode.
     #
     def initialize(value, height, placement = ElementPlacement::TOP_LEFT, x_offset = 0, y_offset = 0)
-      @ucc_ean128 = false
-      @process_tilde = false
+      @ucc_ean128 = nil
+      @process_tilde = nil
       @_type = ElementType::CODE128_BARCODE
       super(value, placement, x_offset, y_offset)
       @height = height
@@ -62,11 +62,9 @@ module DynamicPDFApi
 
       json_array["height"] = @height unless @height.nil?
 
-      # if(@ucc_ean128 != nil)
-      json_array["uccEan128"] = @ucc_ean128
+      json_array["uccEan128"] = @ucc_ean128 unless @ucc_ean128.nil?
 
-      # if(@process_tilde != nil)
-      json_array["processTilde"] = @process_tilde
+      json_array["processTilde"] = @process_tilde unless @process_tilde.nil?
 
       #----------------TextBarcodeElement---------------------------------
       json_array["font"] = @_font_name unless @_font_name.nil?
@@ -75,7 +73,7 @@ module DynamicPDFApi
 
       json_array["fontSize"] = @font_size unless @font_size.nil?
 
-      json_array["showText"] = @show_text if @show_text != "nil"
+      json_array["showText"] = @show_text unless @show_text.nil?
 
       #----------------barcodeElement--------------------------------
 
@@ -93,11 +91,9 @@ module DynamicPDFApi
 
       json_array["yOffset"] = @y_offset unless @y_offset.nil?
 
-      # if(@even_pages != nil)
-      json_array["evenPages"] = @even_pages
+      json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@odd_pages != nil)
-      json_array["oddPages"] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end

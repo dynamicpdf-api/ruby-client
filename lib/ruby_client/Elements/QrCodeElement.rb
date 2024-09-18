@@ -65,11 +65,9 @@ module DynamicPDFApi
 
       json_array['yOffset'] = @y_offset unless @y_offset.nil?
 
-      # if(@even_pages != nil)
-      json_array['evenPages'] = @even_pages
+      json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@odd_pages != nil)
-      json_array['oddPages'] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end

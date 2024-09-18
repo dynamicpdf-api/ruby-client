@@ -47,7 +47,7 @@ module DynamicPDFApi
 
       json_array["fontSize"] = @font_size unless @font_size.nil?
 
-      json_array["showText"] = @show_text if @show_text != "nil"
+      json_array["showText"] = @show_text unless @show_text.nil?
 
       #----------------barcodeElement--------------------------------
 
@@ -65,11 +65,9 @@ module DynamicPDFApi
 
       json_array["yOffset"] = @y_offset unless @y_offset.nil?
 
-      # if(@evenPages != nil)
-      json_array["evenPages"] = @even_pages
+       json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@oddPages != nil)
-      json_array["oddPages"] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end

@@ -42,21 +42,13 @@ module DynamicPDFApi
     def to_json(_options = {})
       json_array = {}
       json_array['name'] = @name
-      json_array['value'] = @value
+      json_array['value'] = @value unless @value.nil?
 
-      json_array['flatten'] = if !@flatten.nil?
-                                @flatten
-                              else
-                                false
-                              end
+      json_array['flatten'] = @flatten unless @flatten.nil?
 
-      json_array['remove'] = if !@remove.nil?
-                               @remove
-                             else
-                               false
-                             end
+      json_array['remove'] = @remove unless @remove.nil?
 
-      JSON.pretty_generate(json_array)
+       JSON.pretty_generate(json_array)
     end
   end
 end

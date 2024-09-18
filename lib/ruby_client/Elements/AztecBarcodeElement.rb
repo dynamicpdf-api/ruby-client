@@ -24,10 +24,10 @@ module DynamicPDFApi
     #
     def initialize(value, placement = ElementPlacement::TOP_LEFT, x_offset = 0, y_offset = 0)
       @_type = ElementType::AZTEC_BARCODE
-      @process_tilde = false
+      @process_tilde = nil
       @symbol_size = nil
       @aztec_error_correction = 0
-      @reader_initialization_symbol = false
+      @reader_initialization_symbol = nil
       super(value, placement, x_offset, y_offset)
     end
 
@@ -71,15 +71,13 @@ module DynamicPDFApi
 
       json_array["type"] = "aztecBarcode"
 
-      # if(@processTilde != nil)
-      json_array["processTilde"] = @process_tilde
+      json_array["processTilde"] = @process_tilde unless @process_tilde.nil?
 
       json_array["symbolSize"] = @symbol_size unless @symbol_size.nil?
 
       json_array["aztecErrorCorrection"] = @aztec_error_correction unless @aztec_error_correction.nil?
 
-      # if(@reader_initialization_symbol != nil)
-      json_array["readerInitializationSymbol"] = @reader_initialization_symbol
+      json_array["readerInitializationSymbol"] = @reader_initialization_symbol unless @reader_initialization_symbol.nil?
 
       #--------------Dim2BarcodeElement------------------------------
 
@@ -101,11 +99,9 @@ module DynamicPDFApi
 
       json_array["yOffset"] = @y_offset unless @y_offset.nil?
 
-      # if(@even_pages != nil)
-      json_array["evenPages"] = @even_pages
+      json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@odd_pages != nil)
-      json_array["oddPages"] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end

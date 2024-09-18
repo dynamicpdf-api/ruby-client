@@ -19,7 +19,7 @@ module DynamicPDFApi
     #
     def initialize(value, height,  placement= ElementPlacement::TOP_LEFT, x_offset = 0, y_offset = 0)
       @_type = ElementType::IATA25_BARCODE
-      @include_check_digit = false
+      @include_check_digit = nil
       @height = height
       super(value, placement, x_offset, y_offset)
     end
@@ -41,8 +41,7 @@ module DynamicPDFApi
 
       json_array['type'] = 'iata25Barcode'
 
-      # if(@IncludeCheckDigit != nil)
-      json_array['includeCheckDigit'] = @include_check_digit
+      json_array['includeCheckDigit'] = @include_check_digit unless @include_check_digit.nil?
 
       json_array['height'] = @height unless @height.nil?
 
@@ -53,7 +52,7 @@ module DynamicPDFApi
 
       json_array['fontSize'] = @font_size unless @font_size.nil?
 
-      json_array['showText'] = @show_text if @show_text != 'nil'
+      json_array['showText'] = @show_text unless @show_text.nil?
 
       #----------------barcodeElement--------------------------------
 
@@ -71,11 +70,9 @@ module DynamicPDFApi
 
       json_array['yOffset'] = @y_offset unless @y_offset.nil?
 
-      # if(@even_pages != nil)
-      json_array['evenPages'] = @even_pages
+      json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@odd_pages != nil)
-      json_array['oddPages'] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end

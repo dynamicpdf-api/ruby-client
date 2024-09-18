@@ -6,8 +6,8 @@ module DynamicPDFApi
   #
   class Element
     def initialize(value = nil, placement = nil, x_offset = 0, y_offset = 0)
-      @even_pages = false
-      @odd_pages = false
+      @even_pages = nil
+      @odd_pages = nil
       @_text_font = nil
       @_resource = nil
       @_type = nil

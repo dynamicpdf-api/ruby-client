@@ -54,7 +54,7 @@ module DynamicPDFApi
 
       #---------------------------------------------------
 
-      json_array['templateId'] = @_template_id
+      json_array['templateId'] = @_template_id unless @_template_id.nil?
 
       json_array['resourceName'] = @resource_name
 

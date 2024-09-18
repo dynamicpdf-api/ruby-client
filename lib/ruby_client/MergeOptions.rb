@@ -4,21 +4,21 @@ module DynamicPDFApi
   #
   class MergeOptions
     def initialize
-      @document_info = 'nil'
-      @document_java_script = 'nil'
-      @document_properties = 'nil'
-      @embedded_files = 'nil'
-      @form_fields = 'nil'
-      @forms_xfa_data = 'nil'
-      @logical_structure = 'nil'
-      @open_action = 'nil'
-      @optional_content_info = 'nil'
-      @out_lines = 'nil'
-      @output_intent = 'nil'
-      @page_annotations = 'nil'
-      @page_labels_and_sections = 'nil'
-      @root_form_field = 'nil'
-      @xmp_metadata = 'nil'
+      @document_info = nil
+      @document_java_script = nil
+      @document_properties = nil
+      @embedded_files = nil
+      @form_fields = nil
+      @forms_xfa_data = nil
+      @logical_structure = nil
+      @open_action = nil
+      @optional_content_info = nil
+      @out_lines = nil
+      @output_intent = nil
+      @page_annotations = nil
+      @page_labels_and_sections = nil
+      @root_form_field = nil
+      @xmp_metadata = nil
     end
 
     #
@@ -99,35 +99,35 @@ module DynamicPDFApi
     def to_json(_options = {})
       json_array = {}
 
-      json_array['documentInfo'] = @document_info if @document_info != 'nil'
+      json_array['documentInfo'] = @document_info unless @document_info.nil?
 
-      json_array['documentJavaScript'] = @document_java_script if @document_java_script != 'nil'
+      json_array['documentJavaScript'] = @document_java_script unless @document_java_script.nil?
 
-      json_array['documentProperties'] = @document_properties if @document_properties != 'nil'
+      json_array['documentProperties'] = @document_properties unless @document_properties.nil?
 
-      json_array['embeddedFiles'] = @embedded_files if @embedded_files != 'nil'
+      json_array['embeddedFiles'] = @embedded_files unless @embedded_files.nil?
 
-      json_array['formFields'] = @form_fields if @form_fields != 'nil'
+      json_array['formFields'] = @form_fields unless @form_fields.nil?
 
-      json_array['formsXfaData'] = @forms_xfa_data if @forms_xfa_data != 'nil'
+      json_array['formsXfaData'] = @forms_xfa_data unless @forms_xfa_data.nil?
 
-      json_array['logicalStructure'] = @logical_structure if @logical_structure != 'nil'
+      json_array['logicalStructure'] = @logical_structure unless @logical_structure.nil?
 
-      json_array['openAction'] = @open_action if @open_action != 'nil'
+      json_array['openAction'] = @open_action unless @open_action.nil?
 
-      json_array['optionalContentInfo'] = @optional_content_info if @optional_content_info != 'nil'
+      json_array['optionalContentInfo'] = @optional_content_info unless @optional_content_info.nil?
 
-      json_array['outlines'] = @out_lines if @out_lines != 'nil'
+      json_array['outlines'] = @out_lines unless @out_lines.nil?
 
-      json_array['outputIntent'] = @output_intent if @output_intent != 'nil'
+      json_array['outputIntent'] = @output_intent unless @output_intent.nil?
 
-      json_array['pageAnnotations'] = @page_annotations if @page_annotations != 'nil'
+      json_array['pageAnnotations'] = @page_annotations unless @page_annotations.nil?
 
-      json_array['pageLabelsAndSections'] = @page_labels_and_sections if @page_labels_and_sections != 'nil'
+      json_array['pageLabelsAndSections'] = @page_labels_and_sections unless @page_labels_and_sections.nil?
 
-      json_array['rootFormField'] = @root_form_field if @root_form_field != 'nil'
+      json_array['rootFormField'] = @root_form_field unless @root_form_field.nil?
 
-      json_array['xmpMetadata'] = @xmp_metadata if @xmp_metadata != 'nil'
+      json_array['xmpMetadata'] = @xmp_metadata unless @xmp_metadata.nil?
 
       JSON.pretty_generate(json_array)
     end

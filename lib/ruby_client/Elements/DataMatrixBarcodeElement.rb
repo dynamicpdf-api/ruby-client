@@ -26,7 +26,7 @@ module DynamicPDFApi
     # @param function_character [String] The def character of the barcode.
     #
     def initialize(value, placement = ElementPlacement::TOP_LEFT, x_offset = 0, y_offset = 0, symbol_size = DataMatrixSymbolSize::AUTO, encoding_type = DataMatrixEncodingType::AUTO, function_character = DataMatrixFunctionCharacter::NONE)
-      @process_tilde = false
+      @process_tilde = nil
       @_type = ElementType::DATA_MATRIX_BARCODE
       super(value, placement, x_offset, y_offset)
       @_data_matrix_symbol_size = symbol_size
@@ -51,8 +51,7 @@ module DynamicPDFApi
 
       json_array["type"] = "dataMatrixBarcode"
 
-      # if(@process_tilde != nil)
-      json_array["processTilde"] = @process_tilde
+      json_array["processTilde"] = @process_tilde unless @process_tilde.nil?
 
       json_array["dataMatrixSymbolSize"] = @_data_matrix_symbol_size unless @_data_matrix_symbol_size.nil?
 
@@ -83,11 +82,9 @@ module DynamicPDFApi
 
       json_array["yOffset"] = @y_offset unless @y_offset.nil?
 
-      # if(@even_pages != nil)
-      json_array["evenPages"] = @even_pages
+      json_array["evenPages"] = @even_pages unless @even_pages.nil?
 
-      # if(@odd_pages != nil)
-      json_array["oddPages"] = @odd_pages
+      json_array["oddPages"] = @odd_pages unless @odd_pages.nil?
 
       JSON.pretty_generate(json_array)
     end
