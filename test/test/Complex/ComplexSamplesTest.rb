@@ -307,9 +307,6 @@ class ComplexSamplesTest < Minitest::Test
     layout_data = LayoutDataResource.new("#{INPUT_PATH}SimpleReportData.json")
     input = DlexInput.new(dlex, layout_data)
     pdf.inputs << input
-
-    pdf.inputs << input
-
     response = pdf.process
 
     if response.is_successful

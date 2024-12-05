@@ -184,6 +184,10 @@ module DynamicPDFApi
         rasterizer_response.status_code = response.code
         rasterizer_response.is_successful = true
       else
+        if rasterizer_response.status_code == '401'
+          raise "Invalid api key specified."
+        end
+        out_data_json = JSON.parse(out_data)
         rasterizer_response.error_json = out_data
         rasterizer_response.error_message = if !out_data_json["message"].nil?
           out_data_json["message"]

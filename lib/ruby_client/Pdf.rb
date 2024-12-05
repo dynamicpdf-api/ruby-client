@@ -366,6 +366,9 @@ module DynamicPDFApi
         ret_object = PdfResponse.new(out_data)
         ret_object.is_successful = true
       else
+        if ret_object.status_code == '401'
+          raise "Invalid api key specified."
+        end
         out_data_json = JSON.parse(out_data)
         ret_object.error_json = out_data
         ret_object.error_message = if !out_data_json["message"].nil?

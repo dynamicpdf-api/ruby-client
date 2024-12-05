@@ -3,13 +3,6 @@ module DynamicPDFApi
   # Represents the base class for response.
   #
   class Response
-    def initialize
-      @_is_successful = false
-      @_error_message = nil
-      @_error_id = nil
-      @_status_code = nil
-      @_error_json = nil
-    end
 
     #
     # Gets the boolean, indicating the response's status.
