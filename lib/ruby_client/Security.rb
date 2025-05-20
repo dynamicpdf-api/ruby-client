@@ -6,18 +6,18 @@ module DynamicPDFApi
   #
   class Security
     def initialize(user_pwd = nil, owner_pwd = nil)
-      @_user_password = user_pwd
-      @_owner_password = owner_pwd
-      @_allow_copy = nil
-      @_allow_edit = nil
-      @_allow_print = nil
-      @_allow_update_annots_and_fields = nil
+      @user_password = user_pwd
+      @owner_password = owner_pwd
+      @allow_copy = nil
+      @allow_edit = nil
+      @allow_print = nil
+      @allow_update_annots_and_fields = nil
 
-      @_allow_accessibility = nil
-      @_allow_form_filling = nil
-      @_allow_high_resolution_printing = nil
-      @_allow_document_assembly = nil
-      @_type = nil
+      @allow_accessibility = nil
+      @allow_form_filling = nil
+      @allow_high_resolution_printing = nil
+      @allow_document_assembly = nil
+      @type = nil
     end
 
     #

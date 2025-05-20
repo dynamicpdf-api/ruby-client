@@ -1,6 +1,7 @@
 module DynamicPDFApi
   require_relative 'Endpoint'
   require_relative 'PdfTextResponse'
+  require_relative 'TextOrder'
 
   #
   # Represents the pdf text endpoint.
@@ -12,15 +13,15 @@ module DynamicPDFApi
     # @param resource [PdfResource] The image resource of type PdfResource.
     # @param start_page [int] The start page.
     # @param page_count [int] The page count.
+    # @param text_order The text extraction order.
     #
-    def initialize(resource, start_page = 1, page_count = 0)
+    def initialize(resource, start_page = 1, page_count = 0, text_order = TextOrder::STREAM)
       @_endpoint_name = 'pdf-text'
-      @start_page = 1
-      @page_count = 0
       super()
       @resource = resource
       @start_page = start_page
       @page_count = page_count
+      @text_order = text_order
     end
 
     #
@@ -34,6 +35,11 @@ module DynamicPDFApi
     attr_accessor :page_count
 
     #
+    # Gets or sets the text extraction order.
+    #
+    attr_accessor :text_order
+
+    #
     # Process the pdf resource to get pdf's text.
     # @return PdfTextResponse Returns collection of PdfTextResponse.
     #
@@ -45,7 +51,7 @@ module DynamicPDFApi
         'Content-Type': 'application/pdf'
       }
       uri = URI.parse("#{@base_url}/v1.0/#{@_endpoint_name}")
-      params = { 'startPage' => @start_page, 'pageCount' => @page_count }
+      params = { 'startPage' => @start_page, 'pageCount' => @page_count, 'textOrder' => @text_order }
       uri.query = URI.encode_www_form(params)
 
       request = Net::HTTP::Post.new(uri.request_uri, header)

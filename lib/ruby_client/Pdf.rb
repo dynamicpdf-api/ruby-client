@@ -170,7 +170,7 @@ module DynamicPDFApi
     #
     def add_html(html, basepath = nil, size = nil, orientation = nil, margins = nil)
       input = nil
-      if file.is_a?(String)
+      if html.is_a?(String)
         input = HtmlInput.new(HtmlResource.new(html), basepath, size, orientation, margins)
       else
         input = HtmlInput.new(resource, basepath, size, orientation, margins)

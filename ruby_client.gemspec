@@ -106,6 +106,7 @@ Gem::Specification.new do |spec|
   "lib/ruby_client/SignatureFieldInformation.rb",
   "lib/ruby_client/Template.rb",
   "lib/ruby_client/TextFieldInformation.rb",
+  "lib/ruby_client/TextOrder.rb",
   "lib/ruby_client/TextReplace.rb",
   "lib/ruby_client/UnitConverter.rb",
   "lib/ruby_client/UrlAction.rb",

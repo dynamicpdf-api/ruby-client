@@ -45,7 +45,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples2.json", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}PdfTextSamples2.json", 'wb') { |file| file.write(response.json_content) }
     end
 
     assert response.is_successful, response.error_message
@@ -65,7 +65,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples3.json", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}PdfTextSamples3.json", 'wb') { |file| file.write(response.json_content) }
     end
 
     assert response.is_successful, response.error_message
@@ -83,7 +83,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples4.json", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}PdfTextSamples4.json", 'wb') { |file| file.write(response.json_content) }
     end
 
     assert response.is_successful, response.error_message
@@ -100,7 +100,7 @@ class PdfTextSamplesTest < Minitest::Test
 
     response = text.process
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples5.json", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}PdfTextSamples5.json", 'wb') { |file| file.write(response.json_content) }
     end
 
     assert response.is_successful, response.error_message
@@ -118,6 +118,69 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
     if response.is_successful
       File.open("#{OUTPUT_PATH}PdfTextSamples6.json", 'wb') { |file| file.write(response.content) }
+    end
+
+    assert response.is_successful, response.error_message
+  end
+
+  def test_TextExtractionStream
+    @name = 'Stream'
+
+    resource = PdfResource.new("#{INPUT_PATH}HARDWARE_SPEC_2025-04-23a.pdf")
+    text = PdfText.new(resource)
+    text.api_key = KEY
+    text.base_url = URL
+
+    text.start_page = 2
+    text.page_count = 1
+    text.text_order = TextOrder::STREAM
+
+    response = text.process
+
+    if response.is_successful
+      File.open("#{OUTPUT_PATH}PdfTextStream.json", 'wb') { |file| file.write(response.content[0]["text"])}
+    end
+
+    assert response.is_successful, response.error_message
+  end
+
+  def test_TextExtractionVisible
+    @name = 'Visible'
+
+    resource = PdfResource.new("#{INPUT_PATH}HARDWARE_SPEC_2025-04-23a.pdf")
+    text = PdfText.new(resource)
+    text.api_key = KEY
+    text.base_url = URL
+
+    text.start_page = 2
+    text.page_count = 1
+    text.text_order = TextOrder::VISIBLE
+
+    response = text.process
+
+    if response.is_successful
+      File.open("#{OUTPUT_PATH}PdfTextVisible.json", 'wb') { |file| file.write(response.content[0]["text"])}
+    end
+
+    assert response.is_successful, response.error_message
+  end
+
+  def test_TextExtractionVisibleExtraSpace
+    @name = 'VisibleExtraSpace'
+
+    resource = PdfResource.new("#{INPUT_PATH}HARDWARE_SPEC_2025-04-23a.pdf")
+    text = PdfText.new(resource)
+    text.api_key = KEY
+    text.base_url = URL
+
+    text.start_page = 2
+    text.page_count = 1
+    text.text_order = TextOrder::VISIBLE_EXTRA_SPACE
+
+    response = text.process
+
+    if response.is_successful
+      File.open("#{OUTPUT_PATH}PdfTextVisibleExtraSpace.json", 'wb') { |file| file.write(response.content[0]["text"])}
     end
 
     assert response.is_successful, response.error_message

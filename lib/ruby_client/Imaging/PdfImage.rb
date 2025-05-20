@@ -42,8 +42,9 @@ module DynamicPDFApi
     attr_accessor  :image_size
 
     def initialize(resource)
-      @resource = resource
+      super()
       @_endpoint_name = 'pdf-image'
+      @resource = resource
     end
 
     def process

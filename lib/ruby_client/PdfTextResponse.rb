@@ -10,13 +10,13 @@ module DynamicPDFApi
     #
     # @param json_content [String] The json content
     #
-    def initialize(json_content)
-      @content = JSON.pretty_generate(json_content).gsub('\\\\', '\\').gsub('\"', '"').gsub('\\\r', '\r').gsub('\\\n', '\n').gsub(
-        '\\\t', '\t'
-      )
-      @content = @content[1..@content.length - 2]
+    def initialize(json_content = nil)
 
-      super(json_content)
+      @content = nil
+      super(json_content) unless json_content.nil?
+
+      @content = JSON.parse(json_content)
+
     end
 
     #
