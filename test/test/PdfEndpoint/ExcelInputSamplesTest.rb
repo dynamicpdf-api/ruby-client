@@ -37,10 +37,10 @@ class ExcelInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}ExcelInputSamples1.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}ExcelToPdf_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}ExcelInputSamples1.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}ExcelToPdf_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end

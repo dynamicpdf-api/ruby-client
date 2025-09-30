@@ -42,7 +42,7 @@ class BmpImagingSampleTest < Minitest::Test
     resource = PdfResource.new("#{INPUT_PATH}DocumentA.pdf")
     pdfImage = PdfImage.new(resource)
     pdfImage.api_key = KEY
-    pdfImage.base_url = URL
+    # pdfImage.base_url = URL
     pdfImage.start_page_number = 2
     pdfImage.page_count = 2
     bmpImageFormat = BmpImageFormat.new

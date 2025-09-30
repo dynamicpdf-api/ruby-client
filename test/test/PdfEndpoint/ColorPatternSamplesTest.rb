@@ -34,10 +34,10 @@ class ColorPatternSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}ColorPatternSamples1.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}NamedColor_PdfOutput.pdf", 'wb') { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}ColorPatternSamples1.json", 'w') { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}NamedColor_JsonOutput.json", 'w') { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
@@ -62,10 +62,10 @@ class ColorPatternSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}ColorPatternSamples2.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}RGBColor_PdfOutput.pdf", 'wb') { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}ColorPatternSamples2.json", 'w') { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}RGBColor_JsonOutput.json", 'w') { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
@@ -90,10 +90,10 @@ class ColorPatternSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}ColorPatternSamples3.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}CMYKColor_PdfOutput.pdf", 'wb') { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}ColorPatternSamples3.json", 'w') { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}CMYKColor_JsonOutput.json", 'w') { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
@@ -118,10 +118,10 @@ class ColorPatternSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}ColorPatternSamples4.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}GrayScale_PdfOutput.pdf", 'wb') { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}ColorPatternSamples4.json", 'w') { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}GrayScale_JsonOutput.json", 'w') { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end

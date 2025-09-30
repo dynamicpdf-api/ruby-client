@@ -339,8 +339,11 @@ module DynamicPDFApi
       }
 
       resource_array = []
-      resource_array << ["Instructions", data_string,
-                         { content_type: "application/octet-stream", filename: "Instructions.json" }]
+      json_bytes = data_string.encode("UTF-8") # UTF-8 text
+      resource_array << ["Instructions",json_bytes.force_encoding("ASCII-8BIT"), # send as binary even if UTF-8 text
+        { content_type: "application/json", filename: "Instructions.json" }
+      ]
+
       @resources.each_value do |field|
         data = if !field._file_path.nil?
             File.binread(field._file_path)

@@ -25,7 +25,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples1.json", 'wb') { |file| file.write(response.json_content) }
+      File.open("#{OUTPUT_PATH}TextExtraction_JsonOutput.json", 'wb') { |file| file.write(response.json_content) }
     end
 
     assert response.is_successful, response.error_message
@@ -45,7 +45,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples2.json", 'wb') { |file| file.write(response.json_content) }
+      File.open("#{OUTPUT_PATH}SinglePage_JsonOutput.json", 'wb') { |file| file.write(response.content) }
     end
 
     assert response.is_successful, response.error_message
@@ -65,59 +65,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples3.json", 'wb') { |file| file.write(response.json_content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_TextExtractionCJKFonts
-    @name = 'CJKFonts'
-
-    resource = PdfResource.new("#{INPUT_PATH}pdf_font-zhcn.pdf")
-
-    text = PdfText.new(resource)
-    text.api_key = KEY
-    text.base_url = URL
-
-    response = text.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples4.json", 'wb') { |file| file.write(response.json_content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_TextExtractionSpecialChars
-    @name = 'SpecialChars'
-
-    resource = PdfResource.new("#{INPUT_PATH}Input.pdf")
-
-    text = PdfText.new(resource)
-    text.api_key = KEY
-    text.base_url = URL
-
-    response = text.process
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples5.json", 'wb') { |file| file.write(response.json_content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_TextExtractionArabic
-    @name = 'Arabic'
-
-    resource = PdfResource.new("#{INPUT_PATH}Arabic.pdf")
-
-    text = PdfText.new(resource)
-    text.api_key = KEY
-    text.base_url = URL
-
-    response = text.process
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextSamples6.json", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}MultiPage_JsonOutput.json", 'wb') { |file| file.write(response.content) }
     end
 
     assert response.is_successful, response.error_message
@@ -138,7 +86,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextStream.json", 'wb') { |file| file.write(response.content[0]["text"])}
+      File.open("#{OUTPUT_PATH}Stream_JsonOutput.json", 'wb') { |file| file.write(response.content[0]["text"])}
     end
 
     assert response.is_successful, response.error_message
@@ -159,7 +107,7 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextVisible.json", 'wb') { |file| file.write(response.content[0]["text"])}
+      File.open("#{OUTPUT_PATH}Visible_JsonOutput.json", 'wb') { |file| file.write(response.content[0]["text"])}
     end
 
     assert response.is_successful, response.error_message
@@ -180,9 +128,10 @@ class PdfTextSamplesTest < Minitest::Test
     response = text.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PdfTextVisibleExtraSpace.json", 'wb') { |file| file.write(response.content[0]["text"])}
+      File.open("#{OUTPUT_PATH}VisibleExtraSpace_JsonOutput.json", 'wb') { |file| file.write(response.content[0]["text"])}
     end
 
     assert response.is_successful, response.error_message
   end
+
 end

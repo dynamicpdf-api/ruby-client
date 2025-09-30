@@ -14,6 +14,7 @@ class SecurityTest < Minitest::Test
   TITLE = TestParameters::TITLE
 
   def test_EncryptPDF
+    @name = 'EncryptNewPdf'
     pdf = Pdf.new
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -38,12 +39,13 @@ class SecurityTest < Minitest::Test
 
     response = pdf.process
 
-    File.open("#{OUTPUT_PATH}SecurityTest1.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
+    File.open("#{OUTPUT_PATH}Encrypt_NewPdf_PdfOutput.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
 
     assert response.is_successful, response.error_message
   end
 
   def test_EncryptExistingPDF
+    @name = 'EncryptExistingPdf'
     pdf = Pdf.new
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -63,7 +65,7 @@ class SecurityTest < Minitest::Test
 
     response = pdf.process
 
-    File.open("#{OUTPUT_PATH}SecurityTest2.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
+    File.open("#{OUTPUT_PATH}Encrypt_ExistingPdf_PdfOutput.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
 
     assert response.is_successful, response.error_message
   end

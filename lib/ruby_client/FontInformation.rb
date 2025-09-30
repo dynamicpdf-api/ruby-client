@@ -1,9 +1,10 @@
 module DynamicPDFApi
   class FontInformation
-    def initialize(font_name, file_path)
-      @_font_name = font_name
+    attr_reader :_name, :file_path
 
-      @_file_path = file_path
+    def initialize(font_name, file_path)
+      @_name = font_name
+      @file_path = file_path
     end
   end
 end

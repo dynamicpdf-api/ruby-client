@@ -1,10 +1,23 @@
 module DynamicPDFApi
   require_relative "FontResource"
+  require_relative "FullNameTable"
 
   #
   # Represents font.
   #
   class Font
+    @font_details = []
+    @load_required = true
+    @lock = Mutex.new
+
+    # For Windows fonts
+    windir = ENV["WINDIR"]
+    if windir && !windir.empty?
+      @path_to_fonts_resource_directory = File.join(windir, "Fonts")
+    else
+      @path_to_fonts_resource_directory = nil
+    end
+
     #
     # Initializes a new instance of the Font class using the font name that is present in the cloud resource
     # manager.
@@ -243,6 +256,70 @@ module DynamicPDFApi
       font = Font.new()
       font._name = font_name
       font
+    end
+
+    def self.from_system(font_name, resource_name = nil)
+      return nil if font_name.nil? || font_name.strip.empty?
+
+      font_name = font_name.gsub(/[- ]/, "")  # Removing the space and - from font_name
+
+      self.load_fonts if @load_required
+
+      @font_details.each do |detail|
+        if detail._name.casecmp(font_name).zero?
+          font_resource = FontResource.new(detail.file_path, resource_name)
+          return Font.create_font(font_resource, font_resource.resource_name)
+        end
+      end
+
+      nil
+    end
+
+    def self.load_fonts
+      return unless @load_required
+      loaded_any = false
+
+      @lock.synchronize do
+        if @path_to_fonts_resource_directory && !@path_to_fonts_resource_directory.empty?
+          dir_Info = File.join(@path_to_fonts_resource_directory.gsub("\\", "/"), "*")
+
+          Dir.glob(dir_Info).each do |file_path|
+            next unless file_path.downcase.end_with?(".ttf", ".otf")
+
+            File.open(file_path, "rb") do |reader|
+              name_table = self.read_font_name_table(reader)
+
+              if name_table && name_table._name && !name_table._name.empty?
+                @font_details << FontInformation.new(name_table._name, file_path)
+              end
+            end
+          end
+        end
+        @load_required = false
+      end
+    end
+
+    def self.read_font_name_table(reader)
+      name_table = nil
+      begin
+        reader.seek(4, IO::SEEK_SET)
+        table_count = (reader.readbyte << 8) | reader.readbyte
+        if table_count > 0
+          reader.seek(12, IO::SEEK_SET)
+          table_directory = reader.read(table_count * 16).b
+          (0...table_directory.size).step(16) do |i|
+            tag_bytes = table_directory[i, 4]
+            tag = tag_bytes.unpack1("V")
+            if tag == 1701667182 # "name"
+              name_table = FullNameTable.new(reader, table_directory, i)
+              break
+            end
+          end
+        end
+      rescue => e
+        puts "Error in read_font_name_table: #{e.message}"
+      end
+      name_table
     end
 
     def to_json(_options = {})

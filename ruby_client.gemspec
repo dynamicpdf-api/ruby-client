@@ -58,6 +58,7 @@ Gem::Specification.new do |spec|
   "lib/ruby_client/FontResource.rb",
   "lib/ruby_client/FormField.rb",
   "lib/ruby_client/FormFieldInformation.rb",
+  "lib/ruby_client/FullNameTable.rb",
   "lib/ruby_client/GoToAction.rb",
   "lib/ruby_client/Grayscale.rb",
   "lib/ruby_client/HtmlInput.rb",

@@ -28,7 +28,7 @@ class ImageToPdfTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}ImageToPdfTest1.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}ImageToPdf_PdfOutput.pdf", 'wb') { |file| file.write(response.content) }
     end
 
     assert response.is_successful, response.error_message

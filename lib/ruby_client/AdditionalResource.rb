@@ -36,17 +36,11 @@ module DynamicPDFApi
         @type = ResourceType::FONT
 
       when ".tiff"
-        @type = ResourceType::IMAGE
       when ".tif"
-        @type = ResourceType::IMAGE
       when ".png"
-        @type = ResourceType::IMAGE
       when ".gif"
-        @type = ResourceType::IMAGE
       when ".jpeg"
-        @type = ResourceType::IMAGE
       when ".jpg"
-        @type = ResourceType::IMAGE
       when ".bmp"
         @type = ResourceType::IMAGE
 
@@ -66,16 +60,22 @@ module DynamicPDFApi
         @file_header = @file_header.bytes
         if (ImageResource.is_png_image(@file_header))
           @_mime_type = "image/png"
+          ".png"
         elsif (ImageResource.is_jpeg_image(@file_header))
           @_mime_type = "image/jpeg"
+          ".jpeg"
         elsif (ImageResource.is_gif_image(@file_header))
           @_mime_type = "image/gif"
+          ".gif"
         elsif (ImageResource.is_tiff_image(@file_header))
           @_mime_type = "image/tiff"
+          ".tiff"
         elsif (ImageResource.is_jpeg2000_image(@file_header))
           @_mime_type = "image/jpeg"
+          ".jpeg"
         elsif (ImageResource.is_valid_bitmap_image(@file_header))
           @_mime_type = "image/bmp"
+          ".bmp"
         else
           raise "Not supported image type or invalid image."
         end

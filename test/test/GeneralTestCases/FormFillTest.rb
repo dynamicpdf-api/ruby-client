@@ -14,6 +14,7 @@ class FormFillTest < Minitest::Test
   TITLE = TestParameters::TITLE
 
   def test_AcroFormFilling
+    @name = 'AcroFormFilling'
     pdf = Pdf.new
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -46,7 +47,7 @@ class FormFillTest < Minitest::Test
 
     response = pdf.process
 
-    File.open("#{OUTPUT_PATH}FormFillTest1.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
+    File.open("#{OUTPUT_PATH}FormFilling_PdfOutput.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
 
     assert response.is_successful, response.error_message
   end

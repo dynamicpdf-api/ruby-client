@@ -26,7 +26,7 @@ class JpegImagingSampleTest < Minitest::Test
     resource = PdfResource.new("#{INPUT_PATH}DocumentA.pdf")
     pdfImage = PdfImage.new(resource)
     pdfImage.api_key = KEY
-    pdfImage.base_url = URL
+    # pdfImage.base_url = URL
 
     jpegImageFormat = JpegImageFormat.new
     pdfImage.image_format = jpegImageFormat

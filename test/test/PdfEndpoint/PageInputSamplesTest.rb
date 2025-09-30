@@ -35,10 +35,10 @@ class PageInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PageInputSamples1.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}TextElement_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}PageInputSamples1.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}TextElement_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
@@ -67,92 +67,10 @@ class PageInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}PageInputSamples2.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}TextElementAddedToPageAndTemplate_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}PageInputSamples2.json", "w") { |file| file.write(pdf.get_instructions_json) }
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_PageInput_AddPage_Pdfoutput
-    @Name = "PageInput_AddPage"
-
-    pdf = Pdf.new
-    pdf.api_key = KEY
-    pdf.base_url = URL
-
-    pdf.author = AUTHOR
-    pdf.title = TITLE
-
-    input = pdf.add_page
-
-    element = LineElement.new(200, 200, ElementPlacement::TOP_CENTER)
-    element.line_style = LineStyle.dots
-
-    input.elements << element
-    response = pdf.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}PageInputSamples3.pdf", "wb") { |file| file.write(response.content) }
-    end
-
-    File.open("#{OUTPUT_PATH}PageInputSamples3.json", "w") { |file| file.write(pdf.get_instructions_json) }
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_PageInput_AddPageTemplate_Pdfoutput
-    @Name = "PageInput_AddPageTemplate"
-
-    pdf = Pdf.new
-    pdf.api_key = KEY
-    pdf.base_url = URL
-
-    pdf.author = AUTHOR
-    pdf.title = TITLE
-
-    input = pdf.add_page
-
-    element = TextElement.new("test", ElementPlacement::TOP_CENTER)
-    template = Template.new("temp")
-    template.elements << element
-
-    input.set_template(template)
-
-    response = pdf.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}PageInputSamples4.pdf", "wb") { |file| file.write(response.content) }
-    end
-
-    File.open("#{OUTPUT_PATH}PageInputSamples4.json", "w") { |file| file.write(pdf.get_instructions_json) }
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_PageInput_AddPageParameters_Pdfoutput
-    @Name = "AddPageParameters"
-
-    pdf = Pdf.new
-    pdf.api_key = KEY
-    pdf.base_url = URL
-
-    pdf.author = AUTHOR
-    pdf.title = TITLE
-
-    input = pdf.add_page(500, 500)
-
-    element = TextElement.new("test", ElementPlacement::TOP_CENTER)
-    input.elements << element
-
-    response = pdf.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}PageInputSamples5.pdf", "wb") { |file| file.write(response.content) }
-    end
-
-    File.open("#{OUTPUT_PATH}PageInputSamples5.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}TextElementAddedToPageAndTemplate_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end

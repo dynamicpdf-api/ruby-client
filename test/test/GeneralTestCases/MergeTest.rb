@@ -14,6 +14,7 @@ class MergeTest < Minitest::Test
   TITLE = TestParameters::TITLE
 
   def test_MergePdfs
+    @name = 'MergePdfs'
     pdf = Pdf.new
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -35,7 +36,7 @@ class MergeTest < Minitest::Test
 
     response = pdf.process
 
-    File.open("#{OUTPUT_PATH}MergeTest1.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
+    File.open("#{OUTPUT_PATH}MergeTest_PdfOutput.pdf", 'wb') { |file| file.write(response.content) } if response.is_successful
 
     assert response.is_successful, response.error_message
   end

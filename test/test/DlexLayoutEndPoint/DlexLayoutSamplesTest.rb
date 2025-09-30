@@ -23,88 +23,8 @@ class DlexLayoutSamplesTest < Minitest::Test
     response = dlex_endpoint.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples1.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}DlexLayout.pdf", 'wb') { |file| file.write(response.content) }
     end
-    assert response.is_successful, response.error_message
-  end
-
-  def test_ContactListDlex_Pdfoutput
-    @name = 'ContactListDlex'
-    layout_data = LayoutDataResource.new("#{INPUT_PATH}ContactList.json")
-    dlex_endpoint = DlexLayout.new('ContactList.dlex', layout_data)
-    dlex_endpoint.api_key = KEY
-    dlex_endpoint.base_url = URL
-
-    response = dlex_endpoint.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples2.pdf", 'wb') { |file| file.write(response.content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_ContentGroupSubReport_Pdfoutput
-    @name = 'ContentGroupSubReport'
-    layout_data = LayoutDataResource.new("#{INPUT_PATH}ContentGroupSubReportData.json")
-    dlex_endpoint = DlexLayout.new('Resources/ReportWriter/ContentGroupSubReport.dlex', layout_data)
-    dlex_endpoint.api_key = KEY
-    dlex_endpoint.base_url = URL
-
-    response = dlex_endpoint.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples3.pdf", 'wb') { |file| file.write(response.content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_AllReportElements_Pdfoutput
-    @name = 'AllReportElements'
-    layout_data = LayoutDataResource.new("#{INPUT_PATH}AllReportElementsData.json")
-    dlex_endpoint = DlexLayout.new('Resources/ReportWriter/AllReportElements.dlex', layout_data)
-    dlex_endpoint.api_key = KEY
-    dlex_endpoint.base_url = URL
-
-    response = dlex_endpoint.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples4.pdf", 'wb') { |file| file.write(response.content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_ContentGroup_Pdfoutput
-    @name = 'ContentGroup'
-    layout_data = LayoutDataResource.new("#{INPUT_PATH}ContentGroupData.json")
-    dlex_endpoint = DlexLayout.new('Resources/ReportWriter/ContentGroup.dlex', layout_data)
-    dlex_endpoint.api_key = KEY
-    dlex_endpoint.base_url = URL
-
-    response = dlex_endpoint.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples5.pdf", 'wb') { |file| file.write(response.content) }
-    end
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_Invoice_Pdfoutput
-    @name = 'Invoice'
-    layout_data = LayoutDataResource.new("#{INPUT_PATH}InvoiceReportData.json")
-    dlex_endpoint = DlexLayout.new('Resources/ReportWriter/Invoice.dlex', layout_data)
-    dlex_endpoint.api_key = KEY
-    dlex_endpoint.base_url = URL
-
-    response = dlex_endpoint.process
-
-    if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples6.pdf", 'wb') { |file| file.write(response.content) }
-    end
-
     assert response.is_successful, response.error_message
   end
 
@@ -120,7 +40,7 @@ class DlexLayoutSamplesTest < Minitest::Test
     response = dlex_endpoint.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples7.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}InvoiceData_Pdfoutput.pdf", 'wb') { |file| file.write(response.content) }
     end
 
     assert response.is_successful, response.error_message
@@ -138,7 +58,7 @@ class DlexLayoutSamplesTest < Minitest::Test
     response = dlex_endpoint.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples8.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}DlexLayoutWithResource.pdf", 'wb') { |file| file.write(response.content) }
     end
     assert response.is_successful, response.error_message
   end
@@ -157,7 +77,7 @@ class DlexLayoutSamplesTest < Minitest::Test
     response = dlex_endpoint.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}DlexLayoutSamples9.pdf", 'wb') { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}DlexWithResourceData.pdf", 'wb') { |file| file.write(response.content) }
     end
     assert response.is_successful, response.error_message
   end

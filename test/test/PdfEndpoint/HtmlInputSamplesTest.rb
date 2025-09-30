@@ -13,7 +13,7 @@ class HtmlInputSamplesTest < Minitest::Test
   TITLE = TestParameters::TITLE
 
   def test_HtmlString_pdfoutput
-    @name = "HtmlToPdf"
+    @name = "HtmlString"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -36,16 +36,16 @@ class HtmlInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}HtmlInputSamples1.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}HtmlString_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}HtmlInputSamples1.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}HtmlString_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
 
   def test_HtmlStringParameters_pdfoutput
-    @name = "HtmlToPdf"
+    @name = "HtmlStringParameters"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -60,16 +60,16 @@ class HtmlInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}HtmlInputSamples2.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}HtmlStringParameters_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}HtmlInputSamples2.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}HtmlStringParameters_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
 
   def test_HtmlResource_pdfoutput
-    @name = "HtmlToPdf"
+    @name = "HtmlResource"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -93,16 +93,16 @@ class HtmlInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}HtmlInputSamples3.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}HtmlResource_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}HtmlInputSamples3.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}HtmlResource_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
 
   def test_HtmlResourcePageSize_pdfoutput
-    @name = "HtmlToPdf"
+    @name = "HtmlResourcePageSize"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -120,16 +120,16 @@ class HtmlInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}HtmlInputSamples4.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}HtmlResourcePageSize_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}HtmlInputSamples4.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}HtmlResourcePageSize_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
 
   def test_HtmlResourcePageHeightPageWidth_pdfoutput
-    @name = "HtmlToPdf"
+    @name = "HtmlResourcePageHeightPageWidth"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -148,16 +148,16 @@ class HtmlInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}HtmlInputSamples5.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}HtmlResourcePageHeightPageWidth_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}HtmlInputSamples5.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}HtmlResourcePageHeightPageWidth_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
 
   def test_HtmlResourceParameters_pdfoutput
-    @name = "HtmlToPdf"
+    @name = "HtmlResourceParameters"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -174,10 +174,10 @@ class HtmlInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}HtmlInputSamples6.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}HtmlResourceParameters_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}HtmlInputSamples6.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}HtmlResourceParameters_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end

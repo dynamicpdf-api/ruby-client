@@ -37,16 +37,16 @@ class WordInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}WordInputSamples1.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}WordToPdf_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}WordInputSamples1.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}WordToPdf_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end
 
   def test_WordFileTextReplace_pdfoutput()
-    @name = "WordToPdf"
+    @name = "WordToPdfTextReplace"
     pdf = Pdf.new()
     pdf.api_key = KEY
     pdf.base_url = URL
@@ -70,10 +70,10 @@ class WordInputSamplesTest < Minitest::Test
     response = pdf.process
 
     if response.is_successful
-      File.open("#{OUTPUT_PATH}WordInputSamples2.pdf", "wb") { |file| file.write(response.content) }
+      File.open("#{OUTPUT_PATH}WordToPdfTextReplace_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
     end
 
-    File.open("#{OUTPUT_PATH}WordInputSamples2.json", "w") { |file| file.write(pdf.get_instructions_json) }
+    File.open("#{OUTPUT_PATH}WordToPdfTextReplace_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
 
     assert response.is_successful, response.error_message
   end

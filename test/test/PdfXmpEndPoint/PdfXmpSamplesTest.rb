@@ -23,45 +23,7 @@ class PdfXmpSamplesTest < Minitest::Test
 
     response = xmp.process
 
-    File.open("#{OUTPUT_PATH}Output1.xml", 'wb') { |file| file.write(response.content) } if response.is_successful
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_XmpSingleResource1
-    @name = 'XmpSingleResource1'
-
-    resource = PdfResource.new("#{INPUT_PATH}aaa_crash.pdf")
-
-    xmp = PdfXmp.new(resource)
-    xmp.api_key = KEY
-    xmp.base_url = URL
-
-    response = xmp.process
-
-    File.open("#{OUTPUT_PATH}Output2.xml", 'wb') { |file| file.write(response.content) } if response.is_successful
-
-    assert response.is_successful, response.error_message
-  end
-
-  def test_XmpMulitipleResource
-    @name = 'XmpMulitipleResource'
-
-    pdfs = ['aaa_crash.pdf', 'bab6c782-2e85-4c6a-b248-9518a06549e900000.pdf', 'COR-GEN-2455447-1-A-1.pdf',
-            'Waiver TX AF.PDF']
-    response = nil
-    (0..(pdfs.length - 1)).each do |i|
-      resource = PdfResource.new(INPUT_PATH + pdfs[i])
-      xmp = PdfXmp.new(resource)
-      xmp.api_key = KEY
-      xmp.base_url = URL
-
-      response = xmp.process
-
-      if response.is_successful
-        File.open("#{OUTPUT_PATH}Output3_#{i}.xml", 'wb') { |file| file.write(response.content) }
-      end
-    end
+    File.open("#{OUTPUT_PATH}XmpResource_XmlOutput.xml", 'wb') { |file| file.write(response.content) } if response.is_successful
 
     assert response.is_successful, response.error_message
   end
