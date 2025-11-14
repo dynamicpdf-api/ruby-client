@@ -18,6 +18,6 @@ module DynamicPDFApi
     #
     # RC4 128 bit security.
     #
-    RC_4128 = 'aC4128'.freeze
+    RC_4128 = 'rc4128'.freeze
   end
 end

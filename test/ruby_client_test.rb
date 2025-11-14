@@ -36,6 +36,7 @@ require_relative 'test\PdfImageEndPoint\GifImagingSampleTest'
 require_relative 'test\PdfImageEndPoint\JpegImagingSampleTest'
 require_relative 'test\PdfImageEndPoint\PngImagingSampleTest'
 require_relative 'test\PdfImageEndPoint\TiffImagingSampleTest'
+require_relative 'test\PdfSecurityInfoEndpoint\PdfSecurityInfoSamplesTest'
 
 class RubyClientTest < Minitest::Test
   def test_that_it_has_a_version_number
