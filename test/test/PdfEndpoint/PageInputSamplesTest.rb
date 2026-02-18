@@ -43,6 +43,31 @@ class PageInputSamplesTest < Minitest::Test
     assert response.is_successful, response.error_message
   end
 
+  def test_PageDimensions_Pdfoutput
+    @Name = "TextElementWithPageDimension"
+
+    pdf = Pdf.new
+    pdf.api_key = KEY
+    pdf.base_url = URL
+
+    pdf.author = AUTHOR
+    pdf.title = TITLE
+
+    pageInput = pdf.add_page(PageSize::POSTCARD, PageOrientation::LANDSCAPE, 25)
+    element = TextElement.new("Hello World", ElementPlacement::TOP_CENTER)
+    pageInput.elements << element
+
+    response = pdf.process
+
+    if response.is_successful
+      File.open("#{OUTPUT_PATH}PageDimensions_PdfOutput.pdf", "wb") { |file| file.write(response.content) }
+    end
+
+    File.open("#{OUTPUT_PATH}PageDimensions_JsonOutput.json", "w") { |file| file.write(pdf.get_instructions_json) }
+
+    assert response.is_successful, response.error_message
+  end
+
   def test_PageInput_TextElementAddedToPageAndTemplate_Pdfoutput
     @Name = "TextElementAddedToPageAndTemplate"
 

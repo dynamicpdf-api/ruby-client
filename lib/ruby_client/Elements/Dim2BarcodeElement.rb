@@ -16,7 +16,7 @@ module DynamicPDFApi
       else
         super(value, placement, x_offset, y_offset)
         @_value_type = ValueType::BASE64_ENCODED_BYTES
-        @value = Base64.encode64(value.pack('C*'))
+        @value = Base64.strict_encode64(value.pack('C*'))
         @placement = placement
         @x_offset = x_offset
         @y_offset = y_offset

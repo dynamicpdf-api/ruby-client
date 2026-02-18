@@ -223,17 +223,20 @@ module DynamicPDFApi
     #
     # Returns a page_input object containing the input pdf.
     #
-    # @param page_width [float] The width of the page.
-    # @param page_height [float] The height of the page.
+    # @param size [String]|[Float]  The size of the page or The width of the page.
+    # @param orientation [String]|[Float] The orientation of the page or The height of the page.
+    # @param  margins [Float] The margins of the page.
     #
-    # @return page_input page_input object.
+    # @return PageInput PageInput object.
     #
-    def add_page(page_width = nil, page_height = nil)
-      input = if !page_width.nil? && !page_height.nil?
-          PageInput.new(page_width, page_height)
-        else
-          PageInput.new
-        end
+    def add_page(size = nil, orientation = nil, margins = nil)
+      if (size.is_a?(String) || size.nil?) && (orientation.is_a?(String) || orientation.nil?)
+        input = PageInput.new(size, orientation, margins)
+      elsif (size.is_a?(Numeric)) && (orientation.is_a?(Numeric))
+        input = PageInput.new(size, orientation)
+      else
+        input = PageInput.new
+      end
       @inputs << input
       input
     end

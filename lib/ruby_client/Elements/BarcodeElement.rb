@@ -29,6 +29,7 @@ module DynamicPDFApi
     #
     attr_accessor :x_dimension
 
+    protected
     #
     # Gets or sets the value of the barcode.
     #

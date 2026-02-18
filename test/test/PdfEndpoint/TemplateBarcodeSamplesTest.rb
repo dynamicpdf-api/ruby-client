@@ -34,7 +34,6 @@ class TemplateBarcodeSamplesTest < Minitest::Test
     element.aztec_error_correction = 30
     element.process_tilde = true
     element.reader_initialization_symbol = true
-    element.value = "test123"
     element.x_offset = -100
     element.y_offset = -100
     template.elements << element

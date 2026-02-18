@@ -10,12 +10,55 @@ module DynamicPDFApi
     @load_required = true
     @lock = Mutex.new
 
-    # For Windows fonts
-    windir = ENV["WINDIR"]
-    if windir && !windir.empty?
-      @path_to_fonts_resource_directory = File.join(windir, "Fonts")
-    else
-      @path_to_fonts_resource_directory = nil
+    def self.init(platform_override = nil)
+      begin
+
+        # -------- Windows --------
+        if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+          windir = ENV["WINDIR"]
+          if windir && !windir.empty?
+            path = File.join(windir, "Fonts")
+            @path_to_fonts_resource_directory = path if Dir.exist?(path)
+          end
+
+        # -------- macOS --------
+        elsif RUBY_PLATFORM =~ /darwin/
+          home = Dir.home rescue nil
+          paths = [
+            "/System/Library/Fonts",
+            "/Library/Fonts",
+            home ? File.join(home, "Library", "Fonts") : nil
+          ]
+
+          paths.each do |path|
+            next unless path
+            if Dir.exist?(path)
+              @path_to_fonts_resource_directory = path
+              break
+            end
+          end
+
+        # -------- Linux --------
+        elsif RUBY_PLATFORM =~ /linux/
+          home = Dir.home rescue nil
+          paths = [
+            "/usr/share/fonts",
+            "/usr/local/share/fonts",
+            home ? File.join(home, ".fonts") : nil,
+            home ? File.join(home, ".local", "share", "fonts") : nil
+          ]
+
+          paths.each do |path|
+            next unless path
+            if Dir.exist?(path)
+              @path_to_fonts_resource_directory = path
+              break
+            end
+          end
+        end
+      rescue e
+        puts "Error in getting the font: #{e.message}"
+      end
     end
 
     #
@@ -278,6 +321,8 @@ module DynamicPDFApi
     def self.load_fonts
       return unless @load_required
       loaded_any = false
+
+      init
 
       @lock.synchronize do
         if @path_to_fonts_resource_directory && !@path_to_fonts_resource_directory.empty?
